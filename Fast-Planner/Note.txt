@@ -1,0 +1,2 @@
+此部分代码来自github项目HKUST-Aerial-Robotics/Fast-Planner：https://github.com/HKUST-Aerial-Robotics/Fast-Planner.git；
+这里对原项目进行过修改，上传的代码为修改后的程序。
