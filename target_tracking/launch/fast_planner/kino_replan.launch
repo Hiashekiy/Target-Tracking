@@ -1,0 +1,82 @@
+<launch>
+  <arg name = "vehicle_type"/>
+  <arg name = "ID"/>
+  <arg name="map_size_x"/>
+  <arg name="map_size_y" />
+  <arg name="map_size_z" />
+
+  <arg name="move_goal"/>
+  <arg name="odom_topic"/>
+  <arg name="control_topic"/>
+  <arg name="cloud_topic" default = "cloud_topic_NONE"/>
+  <arg name="depth_topic" default = "depth_topic_NONE"/>
+  <arg name="camera_pose_topic" default = "camera_pose_topic_NONE"/>
+
+  <!-- main algorithm params -->
+  <include file="$(find target_tracking)/launch/fast_planner/kino_algorithm.xml">
+    <arg name = "vehicle_type" value = "$(arg vehicle_type)"/>
+    <arg name = "ID" value = "$(arg ID)"/>
+    <arg name="map_size_x_" value="$(arg map_size_x)"/>
+    <arg name="map_size_y_" value="$(arg map_size_y)"/>
+    <arg name="map_size_z_" value="$(arg map_size_z)"/>
+    <arg name="odometry_topic" value="$(arg odom_topic)"/>
+
+    <!-- camera pose: transform of camera frame in the world frame -->
+    <!-- depth topic: depth image, 640x480 by default -->
+    <!-- don't set cloud_topic if you already set these ones! -->
+    <arg name="camera_pose_topic" value="$(arg camera_pose_topic)"/>
+    <arg name="depth_topic" value="$(arg depth_topic)"/>
+
+    <!-- topic of point cloud measurement, such as from LIDAR  -->
+    <!-- don't set camera pose and depth, if you already set this one! -->
+    <arg name="cloud_topic" value="$(arg cloud_topic)"/>
+
+    <!-- intrinsic params of the depth camera -->
+    <arg name="cx" value="321.04638671875"/>
+    <arg name="cy" value="243.44969177246094"/>
+    <arg name="fx" value="387.229248046875"/>
+    <arg name="fy" value="387.229248046875"/>
+
+    <!-- maximum velocity and acceleration the drone will reach -->
+    <arg name="max_vel" value="3.0" />
+    <arg name="max_acc" value="3.0" />
+
+    <!-- 1: use 2D Nav Goal to select goal  -->
+    <!-- 2: use global waypoints below  -->
+    <arg name="flight_type" value="1" />
+    
+    <!-- global waypoints -->
+    <!-- If flight_type is set to 2, the drone will travel these waypoints one by one -->
+    <arg name="point_num" value="2" />
+
+    <arg name="point0_x" value="19.0" />
+    <arg name="point0_y" value="0.0" />
+    <arg name="point0_z" value="1.0" />
+
+    <!-- set more waypoints if you need -->
+    <arg name="point1_x" value="-19.0" />
+    <arg name="point1_y" value="0.0" />
+    <arg name="point1_z" value="1.0" />
+
+    <arg name="point2_x" value="0.0" />
+    <arg name="point2_y" value="19.0" />
+    <arg name="point2_z" value="1.0" />
+    
+  </include>
+
+  <!-- trajectory server -->
+  <node pkg="plan_manage" name="traj_server" type="traj_server" output="log">
+    <remap from="/position_cmd" to="$(arg control_topic)"/>
+    <remap from="/odom_world" to="$(arg odom_topic)"/>
+    <remap from = "/time_left_of_current_traj" to = "/$(arg vehicle_type)_$(arg ID)/time_left_of_current_traj" />
+    <param name="traj_server/time_forward" value="1.5" type="double"/>
+  </node>
+
+  <node pkg="waypoint_generator" name="waypoint_generator" type="waypoint_generator" output="log">
+    <remap from="~odom" to="$(arg odom_topic)"/>        
+    <remap from="~goal" to="$(arg move_goal)"/>
+    <remap from="~traj_start_trigger" to="/traj_start_trigger" />
+    <param name="waypoint_type" value="manual-lonely-waypoint"/>    
+  </node>
+
+</launch>

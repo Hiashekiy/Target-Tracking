@@ -1,0 +1,56 @@
+<launch>
+    <arg name = "ID"/>
+    <arg name = "vehicle_type"/>
+    <arg name = "map_size_x" default = "160.0"/>
+    <arg name = "map_size_y" default = "100.0"/>
+    <arg name = "map_size_z" default = "2"/>
+    <arg name = "cruise_height" default = "5"/>
+    <arg name = "cruise_global_points"/>
+
+    <group ns="$(arg vehicle_type)_$(arg ID)"> 
+        <arg name = "odom_topic"    value = "/$(arg vehicle_type)_$(arg ID)/fast_planner/odom" />
+        <arg name = "move_goal"     value = "/$(arg vehicle_type)_$(arg ID)/move_base_simple/goal"/>
+        <arg name = "control_topic" value = "/$(arg vehicle_type)_$(arg ID)/position_control"/>
+        <arg name = "cloud_topic"   value = "/$(arg vehicle_type)_$(arg ID)/cloud_topic" />
+
+        <node pkg = "target_tracking" name = "camera_pose_pub" type = "pose_transfer.py" output = "screen" args = "$(arg vehicle_type) $(arg ID) pose">
+            <param name = "pose_offset"    value = "[0.1, 0, 0, 0, 37, 0]"/>
+            <param name = "topic_pub_data" value = "/$(arg vehicle_type)_$(arg ID)/camera_pos"/>
+            <param name = "topic_sub_data" value = "/$(arg vehicle_type)_$(arg ID)/mavros/local_position/pose"/>
+        </node>
+
+        <node pkg = "target_tracking" name = "multirotor_communication" type = "multirotor_communication.py" output = "screen" args = "$(arg vehicle_type) $(arg ID)"/>
+
+        <!-- <node name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(find target_tracking)/config/traj_riviz_config_$(arg vehicle_type)_$(arg ID).rviz"/> -->
+
+        <include file = "$(find target_tracking)/launch/fast_planner/kino_replan.launch">
+            <arg name = "ID" value = "$(arg ID)"/>
+            <arg name = "vehicle_type" value = "$(arg vehicle_type)"/>
+            <arg name = "map_size_x"    value = "$(arg map_size_x)"/>
+            <arg name = "map_size_y"    value = "$(arg map_size_y)"/>
+            <arg name = "map_size_z"    value = "$(arg map_size_z)"/>
+            <arg name = "move_goal"     value = "$(arg move_goal)"/>       
+            <arg name = "cloud_topic"   value = "$(arg cloud_topic)"/>
+            <arg name = "odom_topic"    value = "$(arg odom_topic)"/>
+            <arg name = "control_topic" value = "$(arg control_topic)"/>
+        </include>
+        
+        <node pkg="target_tracking" name="fast_planner_odom" type = "fastplan_auxiliary.py" output = "screen" args = "$(arg vehicle_type) $(arg ID)">
+            <remap from = "~fast_planner/odom" to = "$(arg odom_topic)" />
+        </node>
+        
+        <node pkg = "target_tracking" name = "plan_manage" type = "plan_manage.py" output = "screen" args = "$(arg vehicle_type) $(arg ID)">
+            <remap from = "~fast_planner/traj_control_topic" to = "$(arg control_topic)"/>
+            <remap from = "~fast_planner/move_goal_topic"    to = "$(arg move_goal)"/>
+            <remap from = "~cloud_points"                    to = "$(arg cloud_topic)"/>
+            <param name = "~cruise_height" value = "$(arg cruise_height)"/>
+            <param name = "~cruise_global_points" value = "$(arg cruise_global_points)"/>
+        </node>
+
+        <node pkg = "target_tracking" name = "target_publish" type = "target_publish.py" output = "screen" args = "$(arg vehicle_type) $(arg ID)">
+            <remap from = "~yolov8_left"  to = "/yolov8/$(arg vehicle_type)_$(arg ID)/left/BoundingBoxes"/>
+            <remap from = "~camero_pose"  to = "/$(arg vehicle_type)_$(arg ID)/camera_pos"/>
+        </node> 
+    </group>
+
+</launch>
