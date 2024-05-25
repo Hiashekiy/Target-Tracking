@@ -29,7 +29,7 @@ pyquaternion == 0.9.9
 <h3 id="3、下载程序"><span class="prefix"></span><span class="content">3、下载程序</span><span class="suffix"></span></h3>
 <pre><code>cd catkin_ws/src
 git clone https://github.com/Hiashekiy/Traget-Tracking.git
-cd \.\. &amp;&amp; catkin_make
+cd .. &amp;&amp; catkin_make
 </code></pre>
 <h3 id="4、将无人机模型复制到px4模型目录下"><span class="prefix"></span><span class="content">4、将无人机模型复制到PX4模型目录下</span><span class="suffix"></span></h3>
 <pre><code>cd ~/catkin_ws_grd/src/Target-Tracking/target_tracking/model/
