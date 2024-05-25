@@ -10,12 +10,11 @@
 <p align="center"> 
 <img width="640" height="360" src="https://github.com/Hiashekiy/Target-Tracking/blob/master/file/target_tracking.gif">
 </p>
-
-# 运行
-### 1、依赖项
-1、XTDrone平台（XTDrone官方配置文件：https://www.yuque.com/xtdrone/manual_cn/basic_config）
-2、Anaconda
-3、Yolov8
+<h1 id="运行"><span class="prefix"></span><span class="content">运行</span><span class="suffix"></span></h1>
+<h3 id="1、依赖项"><span class="prefix"></span><span class="content">1、依赖项</span><span class="suffix"></span></h3>
+<p>1、XTDrone平台（XTDrone官方配置文件：<a href="https://www.yuque.com/xtdrone/manual_cn/basic_config%EF%BC%89">https://www.yuque.com/xtdrone/manual_cn/basic_config）</a><br>
+2、Anaconda<br>
+3、Yolov8</p>
 <h3 id="2、环境配置"><span class="prefix"></span><span class="content">2、环境配置</span><span class="suffix"></span></h3>
 <pre><code>sudo apt-get install libarmadillo-dev ros-melodic-nlopt
 </code></pre>
