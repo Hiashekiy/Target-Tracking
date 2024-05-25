@@ -26,7 +26,7 @@ pyquaternion == 0.9.9
 <p>上面是测试通过的python库版本，如果你运行其他版本出错，建议更换成上述对应版本</p>
 <h3 id="3、下载程序"><span class="prefix"></span><span class="content">3、下载程序</span><span class="suffix"></span></h3>
 <pre><code>cd catkin_ws/src
-git clone https://github.com/Hiashekiy/Traget-Tarcking.git
+git clone https://github.com/Hiashekiy/Target-Tracking.git
 cd .. &amp;&amp; catkin_make
 </code></pre>
 <h3 id="4、赋予python文件执行权限"><span class="prefix"></span><span class="content">4、赋予python文件执行权限</span><span class="suffix"></span></h3>
