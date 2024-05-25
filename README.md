@@ -8,7 +8,7 @@
 <h1 id="演示视频"><span class="prefix"></span><span class="content">演示视频</span><span class="suffix"></span></h1>
 <p><a href="https://youtu.be/Kgru534RLyE"> XTdrone仿真验证演示</a><br>
 <p align="center">
-  <img src="files/raptor1.gif" width = "400" height = "225"/>
+  <img src="file/raptor1.gif" width = "400" height = "225"/>
 </p>
 <h1 id="运行"><span class="prefix"></span><span class="content">运行</span><span class="suffix"></span></h1>
 <h3 id="1、依赖项"><span class="prefix"></span><span class="content">1、依赖项</span><span class="suffix"></span></h3>
