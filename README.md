@@ -51,7 +51,7 @@ roslaunch yolov8_ros yolov8_launch_iris.launch
 </code></pre>
 <h3 id="8、控制目标运动"><span class="prefix"></span><span class="content">8、控制目标运动</span><span class="suffix"></span></h3>
 <pre><code>cd ~/catkin_ws/src/Target-Tracking/target_tracking/scripts/xtdrone
-python control_actor.py 0 120 0 2
+python actor_control.py 0 120 0 2
 </code></pre>
 <p>python脚本后四个数分别是actor编号、期望x坐标、期望y坐标和行进速度</p>
 <h1 id="总结"><span class="prefix"></span><span class="content">总结</span><span class="suffix"></span></h1>
