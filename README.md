@@ -8,8 +8,9 @@
 <h1 id="演示视频"><span class="prefix"></span><span class="content">演示视频</span><span class="suffix"></span></h1>
 <p><a href="https://youtu.be/Kgru534RLyE"> XTdrone仿真验证演示</a></p>
 <p align="center"> 
-<img width="640" height="360" src="">
+<img width="640" height="360" src="https://github.com/Hiashekiy/Target-Tracking/blob/master/file/target_tracking.gif">
 </p>
+
 # 运行
 ### 1、依赖项
 1、XTDrone平台（XTDrone官方配置文件：https://www.yuque.com/xtdrone/manual_cn/basic_config）
