@@ -38,7 +38,7 @@ cd ~/catkin_ws/src/Target-Tracking/yolov8_ros/yolov8_ros/scripts
 sudo chmod +x *.py
 </code></pre>
 <h3 id="5、将无人机模型复制到px4模型目录下"><span class="prefix"></span><span class="content">5、将无人机模型复制到PX4模型目录下</span><span class="suffix"></span></h3>
-<pre><code>cd ~/catkin_ws/src/Target-Tracking/target_tracking//models
+<pre><code>cd ~/catkin_ws/src/Target-Tracking/target_tracking/models
 cp -r iris_stereo_camera ~/PX4_Firmware/Tools/sitl_gazebo/models
 </code></pre>
 <h3 id="6、运行"><span class="prefix"></span><span class="content">6、运行</span><span class="suffix"></span></h3>
