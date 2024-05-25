@@ -5,6 +5,7 @@
 
 <h1 id="target-tracking-system-目标跟踪系统"><span class="prefix"></span><span class="content">Target-Tracking System 目标跟踪系统</span><span class="suffix"></span></h1>
 <p>本项目建立了一个完善的<strong>无人机目标跟踪系统</strong>，包括未知环境下<strong>障碍地图</strong>的建立、无人机<strong>跟踪轨迹</strong>的生成以及<strong>跟踪目标的识别与定位</strong>，使用Px4作为无人机的底层控制，实现从算法到硬件控制的全部跟踪流程，并且最终在<strong>XTDrone平台</strong>上进行了全面的仿真验证。</p>
+<p align="center"> <img src="files/target_tracking.gif" width = "640" height = "360"/> </p>
 <h1 id="演示视频"><span class="prefix"></span><span class="content">演示视频</span><span class="suffix"></span></h1>
 <p><a href="https://youtu.be/Kgru534RLyE"> XTdrone仿真验证演示</a></p>
 <h1 id="运行"><span class="prefix"></span><span class="content">运行</span><span class="suffix"></span></h1>
